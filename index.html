@@ -9,70 +9,28 @@
         />
         <base href="" />
         <link rel="stylesheet" href="./index.css" />
-
-        <style id="cloudTourV3Style">
-            :root { --tour-safe-bottom: max(12px, env(safe-area-inset-bottom)); }
-            #viewerBranding, #controlsWrap { display: none !important; }
-            .tour-hidden { display: none !important; }
-            .tour-glass { background: rgba(13,18,24,.66); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,.14); box-shadow: 0 12px 38px rgba(0,0,0,.28); }
-
-            #tourIntro { position: fixed; inset: 0; z-index: 1000; display:flex; align-items:flex-end; justify-content:center; padding: 24px 18px calc(28px + env(safe-area-inset-bottom)); background: linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.20) 40%, rgba(0,0,0,.78) 100%); pointer-events:auto; }
-            .tour-intro-card { width:min(520px, 100%); padding:22px; border-radius:24px; color:#fff; }
-            .tour-kicker { font-size:11px; letter-spacing:.18em; opacity:.70; font-weight:700; }
-            .tour-intro-card h1 { margin:8px 0 8px; font-size:28px; line-height:1.15; }
-            .tour-intro-card p { margin:0 0 18px; opacity:.78; line-height:1.6; font-size:14px; }
-            .tour-intro-actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-            .tour-btn { appearance:none; border:0; border-radius:14px; min-height:48px; padding:0 16px; color:#fff; background:rgba(255,255,255,.12); font-weight:700; font-size:15px; cursor:pointer; }
-            .tour-btn.primary { background:#ff6a1a; }
-            .tour-btn:disabled { opacity:.45; }
-            .tour-btn.wide { grid-column:1 / -1; }
-
-            #tourTopbar { position:fixed; z-index:700; top:max(12px, env(safe-area-inset-top)); left:12px; right:12px; display:flex; align-items:center; justify-content:space-between; pointer-events:none; }
-            .tour-brand { color:#fff; padding:9px 12px; border-radius:14px; pointer-events:auto; }
-            .tour-brand b { display:block; font-size:14px; }
-            .tour-brand small { opacity:.66; font-size:10px; }
-            .tour-status { color:#fff; border-radius:999px; padding:8px 11px; font-size:11px; pointer-events:auto; }
-
-            #tourBottom { position:fixed; z-index:700; left:50%; transform:translateX(-50%); bottom:var(--tour-safe-bottom); width:min(560px, calc(100% - 18px)); min-height:62px; border-radius:20px; display:grid; grid-template-columns:repeat(5,1fr); padding:6px; gap:3px; pointer-events:auto; }
-            .tour-nav { border:0; background:transparent; color:rgba(255,255,255,.72); border-radius:14px; min-height:50px; font-size:11px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; }
-            .tour-nav .ico { font-size:19px; line-height:1; }
-            .tour-nav.active { color:#fff; background:rgba(255,255,255,.13); }
-
-            #tourCrosshair { position:fixed; z-index:500; left:50%; top:50%; transform:translate(-50%,-50%); width:18px; height:18px; pointer-events:none; opacity:.58; }
-            #tourCrosshair:before,#tourCrosshair:after{content:"";position:absolute;background:#fff;border-radius:2px;box-shadow:0 0 4px rgba(0,0,0,.7)}
-            #tourCrosshair:before{width:16px;height:1px;left:1px;top:8px} #tourCrosshair:after{width:1px;height:16px;left:8px;top:1px}
-
-            #tourPoiLayer { position:fixed; inset:0; z-index:610; pointer-events:none; }
-            .tour-poi-marker { position:absolute; transform:translate(-50%,-100%); border:0; border-radius:999px; padding:7px 11px; color:#fff; font-size:12px; font-weight:700; white-space:nowrap; pointer-events:auto; background:rgba(15,80,110,.83); border:1px solid rgba(160,235,255,.48); box-shadow:0 6px 22px rgba(0,0,0,.30); }
-            .tour-poi-marker:after { content:""; position:absolute; left:50%; bottom:-7px; transform:translateX(-50%); border:7px solid transparent; border-top-color:rgba(15,80,110,.83); border-bottom:0; }
-
-            .tour-panel-backdrop { position:fixed; inset:0; z-index:900; background:rgba(0,0,0,.36); display:flex; align-items:flex-end; justify-content:center; pointer-events:auto; }
-            .tour-sheet { width:min(620px,100%); max-height:min(78vh,720px); overflow:auto; border-radius:24px 24px 0 0; padding:18px 18px calc(20px + env(safe-area-inset-bottom)); color:#fff; }
-            .tour-sheet-handle { width:42px;height:4px;border-radius:4px;background:rgba(255,255,255,.28);margin:0 auto 12px; }
-            .tour-sheet-head { display:flex; align-items:center; justify-content:space-between; gap:12px; }
-            .tour-sheet h2 { margin:0 0 4px; font-size:20px; }
-            .tour-sheet p { opacity:.78; line-height:1.65; font-size:14px; }
-            .tour-close { border:0; background:rgba(255,255,255,.10); color:#fff; width:36px; height:36px; border-radius:50%; font-size:24px; }
-            .tour-poi-list { display:grid; gap:10px; margin-top:14px; }
-            .tour-poi-card { border:1px solid rgba(255,255,255,.12); border-radius:16px; padding:14px; background:rgba(255,255,255,.06); }
-            .tour-poi-card b { font-size:15px; }
-            .tour-poi-card small { display:block; opacity:.55; margin-top:4px; }
-            .tour-card-actions { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
-            .tour-mini { border:0; border-radius:10px; padding:9px 11px; background:rgba(255,255,255,.10); color:#fff; font-size:12px; }
-            .tour-mini.accent { background:#ff6a1a; }
-            .tour-input, .tour-textarea { box-sizing:border-box; width:100%; border:1px solid rgba(255,255,255,.15); background:rgba(0,0,0,.22); color:#fff; border-radius:10px; padding:10px 11px; font:inherit; margin-top:8px; }
-            .tour-textarea { min-height:68px; resize:vertical; }
-            .tour-row { display:grid; grid-template-columns:1fr auto; gap:8px; align-items:center; }
-            .tour-note { margin-top:10px; padding:10px 12px; border-radius:12px; background:rgba(255,180,70,.10); border:1px solid rgba(255,180,70,.18); font-size:12px; color:rgba(255,255,255,.76); line-height:1.55; }
-            .tour-toast { position:fixed; z-index:1200; left:50%; top:18%; transform:translateX(-50%); color:#fff; border-radius:999px; padding:10px 14px; font-size:12px; pointer-events:none; }
-            .tour-guidebar { position:fixed; z-index:720; top:calc(max(12px, env(safe-area-inset-top)) + 64px); left:50%; transform:translateX(-50%); color:#fff; border-radius:16px; padding:10px 12px; width:min(420px, calc(100% - 32px)); display:flex; align-items:center; justify-content:space-between; gap:12px; pointer-events:auto; }
-            .tour-guidebar span { font-size:12px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-            .tour-guidebar button { border:0; border-radius:9px; background:rgba(255,255,255,.12); color:#fff; padding:7px 10px; }
-            @media (min-width:700px){ #tourBottom{bottom:18px} .tour-sheet{border-radius:24px;margin-bottom:18px} .tour-panel-backdrop{align-items:center} }
+        <style id="cloudTourV4Style">
+            :root { --tour-safe-bottom:max(12px,env(safe-area-inset-bottom)); --tour-accent:#ff6a1a; }
+            #viewerBranding,#controlsWrap{display:none!important}.tour-hidden{display:none!important}
+            .tour-glass{background:rgba(13,18,24,.68);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.14);box-shadow:0 12px 38px rgba(0,0,0,.28)}
+            #tourIntro{position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-end;justify-content:center;padding:24px 18px calc(28px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.18) 42%,rgba(0,0,0,.80));pointer-events:auto}
+            .tour-intro-card{width:min(540px,100%);padding:22px;border-radius:24px;color:#fff}.tour-kicker{font-size:11px;letter-spacing:.18em;opacity:.7;font-weight:700}.tour-intro-card h1{margin:8px 0;font-size:28px;line-height:1.15}.tour-intro-card p{margin:0 0 18px;opacity:.78;line-height:1.6;font-size:14px}.tour-intro-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+            .tour-btn{appearance:none;border:0;border-radius:14px;min-height:48px;padding:0 16px;color:#fff;background:rgba(255,255,255,.12);font-weight:700;font-size:15px;cursor:pointer}.tour-btn.primary{background:var(--tour-accent)}.tour-btn:disabled{opacity:.45}.tour-btn.wide{grid-column:1/-1}
+            #tourTopbar{position:fixed;z-index:700;top:max(12px,env(safe-area-inset-top));left:12px;right:12px;display:flex;align-items:center;justify-content:space-between;pointer-events:none}.tour-brand{color:#fff;padding:9px 12px;border-radius:14px;pointer-events:auto}.tour-brand b{display:block;font-size:14px}.tour-brand small{opacity:.66;font-size:10px}.tour-top-actions{display:flex;gap:7px;pointer-events:auto}.tour-status,.tour-admin-btn{color:#fff;border-radius:999px;padding:8px 11px;font-size:11px;border:0}.tour-admin-btn{background:rgba(255,106,26,.88);font-weight:700}
+            #tourBottom{position:fixed;z-index:700;left:50%;transform:translateX(-50%);bottom:var(--tour-safe-bottom);width:min(560px,calc(100% - 18px));min-height:62px;border-radius:20px;display:grid;grid-template-columns:repeat(5,1fr);padding:6px;gap:3px;pointer-events:auto}.tour-nav{border:0;background:transparent;color:rgba(255,255,255,.72);border-radius:14px;min-height:50px;font-size:11px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px}.tour-nav .ico{font-size:19px;line-height:1}.tour-nav.active{color:#fff;background:rgba(255,255,255,.13)}
+            #tourCrosshair{position:fixed;z-index:500;left:50%;top:50%;transform:translate(-50%,-50%);width:18px;height:18px;pointer-events:none;opacity:.58}#tourCrosshair:before,#tourCrosshair:after{content:"";position:absolute;background:#fff;border-radius:2px;box-shadow:0 0 4px rgba(0,0,0,.7)}#tourCrosshair:before{width:16px;height:1px;left:1px;top:8px}#tourCrosshair:after{width:1px;height:16px;left:8px;top:1px}
+            #tourPoiLayer{position:fixed;inset:0;z-index:610;pointer-events:none}.tour-poi-marker{position:absolute;transform:translate(-50%,-100%);border:0;border-radius:999px;padding:7px 11px;color:#fff;font-size:12px;font-weight:700;white-space:nowrap;pointer-events:auto;background:rgba(15,80,110,.88);border:1px solid rgba(160,235,255,.52);box-shadow:0 6px 22px rgba(0,0,0,.32)}.tour-poi-marker:before{content:"📍";margin-right:4px}.tour-poi-marker:after{content:"";position:absolute;left:50%;bottom:-7px;transform:translateX(-50%);border:7px solid transparent;border-top-color:rgba(15,80,110,.88);border-bottom:0}
+            #tourRouteSvg{position:fixed;inset:0;z-index:600;width:100%;height:100%;pointer-events:none;overflow:visible}#tourRouteLine{fill:none;stroke:rgba(255,190,72,.88);stroke-width:3;stroke-dasharray:9 7;filter:drop-shadow(0 2px 3px rgba(0,0,0,.55))}
+            .tour-panel-backdrop{position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.36);display:flex;align-items:flex-end;justify-content:center;pointer-events:auto}.tour-sheet{width:min(650px,100%);max-height:min(82vh,760px);overflow:auto;border-radius:24px 24px 0 0;padding:18px 18px calc(20px + env(safe-area-inset-bottom));color:#fff}.tour-sheet-handle{width:42px;height:4px;border-radius:4px;background:rgba(255,255,255,.28);margin:0 auto 12px}.tour-sheet-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.tour-sheet h2{margin:0 0 4px;font-size:20px}.tour-sheet p{opacity:.78;line-height:1.65;font-size:14px}.tour-close{border:0;background:rgba(255,255,255,.10);color:#fff;width:36px;height:36px;border-radius:50%;font-size:24px}
+            .tour-poi-list{display:grid;gap:10px;margin-top:14px}.tour-poi-card{border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px;background:rgba(255,255,255,.06)}.tour-poi-card b{font-size:15px}.tour-poi-card small{display:block;opacity:.60;margin-top:5px;line-height:1.45}.tour-card-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.tour-mini{border:0;border-radius:10px;padding:9px 11px;background:rgba(255,255,255,.10);color:#fff;font-size:12px}.tour-mini.accent{background:var(--tour-accent)}.tour-mini.danger{background:rgba(190,45,45,.55)}.tour-mini:disabled{opacity:.4}
+            .tour-input,.tour-textarea,.tour-select{box-sizing:border-box;width:100%;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.22);color:#fff;border-radius:10px;padding:10px 11px;font:inherit;margin-top:8px}.tour-textarea{min-height:72px;resize:vertical}.tour-grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tour-note{margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(255,180,70,.10);border:1px solid rgba(255,180,70,.18);font-size:12px;color:rgba(255,255,255,.78);line-height:1.55}
+            .tour-toast{position:fixed;z-index:1200;left:50%;top:18%;transform:translateX(-50%);color:#fff;border-radius:999px;padding:10px 14px;font-size:12px;pointer-events:none;max-width:calc(100% - 30px);text-align:center}.tour-guidebar{position:fixed;z-index:720;top:calc(max(12px,env(safe-area-inset-top)) + 64px);left:50%;transform:translateX(-50%);color:#fff;border-radius:16px;padding:10px 12px;width:min(470px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:auto}.tour-guidebar span{font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.tour-guidebar button{border:0;border-radius:9px;background:rgba(255,255,255,.12);color:#fff;padding:7px 10px}
+            #tourPlaceBanner{position:fixed;z-index:1150;left:50%;top:calc(max(12px,env(safe-area-inset-top)) + 58px);transform:translateX(-50%);width:min(500px,calc(100% - 30px));padding:12px 14px;border-radius:16px;color:#fff;text-align:center;font-size:13px;pointer-events:none}.tour-place-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#ffb338;margin-right:7px;box-shadow:0 0 0 5px rgba(255,179,56,.16)}
+            #tourDetail{position:fixed;z-index:760;left:50%;transform:translateX(-50%);bottom:calc(var(--tour-safe-bottom) + 72px);width:min(520px,calc(100% - 22px));padding:14px 15px;border-radius:18px;color:#fff;pointer-events:auto}.tour-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.tour-detail-head h3{margin:0 0 5px;font-size:18px}.tour-detail-desc{margin:0;opacity:.82;line-height:1.55;font-size:13px;max-height:82px;overflow:auto}.tour-detail-actions{display:flex;gap:7px;margin-top:10px}.tour-detail-actions button{border:0;border-radius:10px;padding:8px 10px;background:rgba(255,255,255,.11);color:#fff;font-size:12px}
+            .route-row{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.08)}.route-num{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(255,106,26,.9);font-weight:700;font-size:12px}.route-meta{font-size:12px;opacity:.66;margin-top:4px;line-height:1.45}
+            @media (min-width:700px){#tourBottom{bottom:18px}.tour-sheet{border-radius:24px;margin-bottom:18px}.tour-panel-backdrop{align-items:center}#tourDetail{bottom:92px}}
         </style>
-
-
-        <!--
+<!--
             Single injection seam. `renderViewerHtml` replaces the contents of this block to
             supply asset urls and inline settings, so anything generating a page around the
             viewer goes through that function rather than pattern-matching this document.
@@ -168,36 +126,36 @@
     </head>
     <body>
         <canvas id="application-canvas"></canvas>
-
-        <!-- Cloud Tour V3: product-style tourism UI -->
+        <!-- Cloud Tour V4: public tour + lightweight admin -->
         <div id="tourIntro">
             <div class="tour-intro-card tour-glass">
-                <div class="tour-kicker">REAL-SCENE 3D CLOUD TOUR</div>
+                <div class="tour-kicker">REAL-SCENE 3D CLOUD TOUR · V4</div>
                 <h1 id="tourIntroTitle">实景 3D 云游</h1>
-                <p id="tourIntroSub">空中浏览、第一视角漫游、景点标记与语音讲解，一套适合美丽乡村与地方文旅展示的轻量网页体验。</p>
+                <p id="tourIntroSub">空中总览、地面漫游、精准景点点位、智能语音讲解与推荐游览线路。</p>
                 <div class="tour-intro-actions">
                     <button id="tourEnterAir" class="tour-btn primary" disabled>场景加载中…</button>
-                    <button id="tourEnterFly" class="tour-btn" disabled>第一视角</button>
-                    <button id="tourEnterGuide" class="tour-btn wide" disabled>▶ 自动导览（设置景点后可用）</button>
+                    <button id="tourEnterRoam" class="tour-btn" disabled>地面漫游</button>
+                    <button id="tourEnterGuide" class="tour-btn wide" disabled>▶ 推荐线路导览</button>
                 </div>
             </div>
         </div>
-
         <div id="tourTopbar" class="tour-hidden">
-            <div class="tour-brand tour-glass"><b id="tourBrandTitle">实景 3D 云游</b><small>数字文旅 · 云端漫游</small></div>
-            <div class="tour-status tour-glass" id="tourModeStatus">空中视角</div>
+            <div class="tour-brand tour-glass"><b id="tourBrandTitle">实景 3D 云游</b><small id="tourBrandSub">数字文旅 · 云端漫游</small></div>
+            <div class="tour-top-actions"><button id="tourAdminBtn" class="tour-admin-btn tour-hidden">⚙ 后台</button><div class="tour-status tour-glass" id="tourModeStatus">空中总览</div></div>
         </div>
         <div id="tourCrosshair" class="tour-hidden"></div>
+        <svg id="tourRouteSvg" class="tour-hidden"><polyline id="tourRouteLine" points=""></polyline></svg>
         <div id="tourPoiLayer" class="tour-hidden"></div>
-
+        <div id="tourPlaceBanner" class="tour-glass tour-hidden"><span class="tour-place-dot"></span><span id="tourPlaceText">请直接点击要标记的景物</span></div>
+        <div id="tourDetail" class="tour-glass tour-hidden"><div class="tour-detail-head"><div><h3 id="tourDetailTitle"></h3><p id="tourDetailDesc" class="tour-detail-desc"></p></div><button class="tour-close" id="tourDetailClose">×</button></div><div class="tour-detail-actions"><button id="tourReplay">🔊 重播讲解</button><button id="tourStopVoice">⏹ 停止语音</button></div></div>
         <nav id="tourBottom" class="tour-glass tour-hidden" aria-label="云游功能栏">
             <button class="tour-nav active" id="tourAirBtn"><span class="ico">✈</span><span>空中</span></button>
-            <button class="tour-nav" id="tourFlyBtn"><span class="ico">🕹</span><span>漫游</span></button>
-            <button class="tour-nav" id="tourPoiBtn"><span class="ico">⌖</span><span>景点</span></button>
-            <button class="tour-nav" id="tourGuideBtn"><span class="ico">▶</span><span>导览</span></button>
-            <button class="tour-nav" id="tourMoreBtn"><span class="ico">☰</span><span>设置</span></button>
+            <button class="tour-nav" id="tourRoamBtn"><span class="ico">🕹</span><span>漫游</span></button>
+            <button class="tour-nav" id="tourPoiBtn"><span class="ico">📍</span><span>景点</span></button>
+            <button class="tour-nav" id="tourGuideBtn"><span class="ico">🧭</span><span>导览</span></button>
+            <button class="tour-nav" id="tourMoreBtn"><span class="ico">☰</span><span>更多</span></button>
         </nav>
-        <div id="tourGuidebar" class="tour-guidebar tour-glass tour-hidden"><span id="tourGuideText">自动导览</span><button id="tourGuideStop">停止</button></div>
+        <div id="tourGuidebar" class="tour-guidebar tour-glass tour-hidden"><span id="tourGuideText">推荐线路导览</span><button id="tourGuideStop">停止</button></div>
         <div id="tourToast" class="tour-toast tour-glass tour-hidden"></div>
         <div id="tourPanelHost"></div>
 
@@ -792,201 +750,71 @@
         <!-- Application Script -->
         <script type="module">
             import { main } from './index.js';
-
             const { config, settings } = window.sse;
             const { poster } = config;
             if (poster) {
                 const element = document.getElementById('poster');
                 element.style.setProperty('--poster-url', `url(${poster.src})`);
-                element.style.display = 'block';
-                element.style.filter = 'blur(40px)';
+                element.style.display = 'block'; element.style.filter = 'blur(40px)';
                 document.documentElement.style.setProperty('--canvas-opacity', '0');
             }
-
             document.addEventListener('DOMContentLoaded', async () => {
-                const $ = (id) => document.getElementById(id);
-                const canvas = $('application-canvas');
-                const settingsJson = await settings;
-                const viewer = await main(canvas, settingsJson, config);
-                const { app, events, state, camera: cameraEntity } = viewer.global;
-
-                const STORAGE_KEY = 'cloudTourV3Config';
-                const defaults = {
-                    title: '实景 3D 云游',
-                    subtitle: '数字文旅 · 云端漫游',
-                    pois: [
-                        { name:'景点一', desc:'这里可以填写景点的历史、文化与特色介绍。', pose:null, focus:null },
-                        { name:'景点二', desc:'进入设置后，把镜头移动到合适位置并点击“记录当前视角”。', pose:null, focus:null },
-                        { name:'景点三', desc:'粗略版先做三个点，后续可以扩展为更多景点和完整线路。', pose:null, focus:null }
-                    ]
+                const $=(id)=>document.getElementById(id), canvas=$('application-canvas');
+                const settingsJson=await settings, viewer=await main(canvas,settingsJson,config);
+                const {app,events,state,camera:cameraEntity}=viewer.global;
+                const query=new URL(location.href).searchParams;
+                const isAdmin=query.get('admin')==='1';
+                const STORAGE_KEY='cloudTourV4AdminDraft';
+                const defaults={version:4,title:'实景 3D 云游',subtitle:'数字文旅 · 云端漫游',autoNarrate:true,airPose:null,roamPose:null,pois:[
+                    {id:'p1',name:'景点一',desc:'在后台中先在模型上精准打点，再记录该景点的最佳观察视角。',anchor:null,pose:null,segment:{distance:'',road:'步道',minutes:'',difficulty:'轻松'}},
+                    {id:'p2',name:'景点二',desc:'景点点位与观察机位彼此独立，因此标签可以准确落在建筑上。',anchor:null,pose:null,segment:{distance:'',road:'石板路',minutes:'',difficulty:'轻松'}},
+                    {id:'p3',name:'景点三',desc:'推荐线路按景点顺序连接，可填写距离、道路类型和预计步行时间。',anchor:null,pose:null,segment:{distance:'',road:'乡村道路',minutes:'',difficulty:'一般'}}
+                ]};
+                const clone=(v)=>JSON.parse(JSON.stringify(v));
+                const normalize=(cfg={})=>{const x={...clone(defaults),...cfg};x.pois=Array.isArray(cfg.pois)&&cfg.pois.length?cfg.pois.map((p,i)=>({id:p.id||`p${i+1}`,name:p.name||`景点${i+1}`,desc:p.desc||'',anchor:p.anchor||null,pose:p.pose||null,segment:{distance:'',road:'步道',minutes:'',difficulty:'轻松',...(p.segment||{})}})):clone(defaults.pois);return x;};
+                let online={}; try{const r=await fetch(`./tour-config.json?v=${Date.now()}`);if(r.ok)online=await r.json();}catch{}
+                let draft={};if(isAdmin){try{draft=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}catch{}}
+                let tour=normalize({...online,...draft,pois:(draft.pois||online.pois)});
+                const saveDraft=()=>{if(isAdmin)localStorage.setItem(STORAGE_KEY,JSON.stringify(tour));};
+                const esc=(s='')=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+                const snapshot=()=>{const c=viewer.cameraManager?.camera;if(!c)return null;return{position:[c.position.x,c.position.y,c.position.z],angles:[c.angles.x,c.angles.y,c.angles.z],distance:c.distance,fov:c.fov,mode:state.cameraMode}};
+                const toast=(msg)=>{const e=$('tourToast');e.textContent=msg;e.classList.remove('tour-hidden');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.add('tour-hidden'),1900)};
+                const speak=(text)=>{if(!('speechSynthesis'in window)||!text)return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='zh-CN';u.rate=.92;u.pitch=1;speechSynthesis.speak(u)};
+                const setTitle=()=>{$('tourIntroTitle').textContent=tour.title;$('tourBrandTitle').textContent=tour.title;$('tourBrandSub').textContent=tour.subtitle||defaults.subtitle;document.title=tour.title};setTitle();
+                const enterProduct=()=>{$('tourIntro').classList.add('tour-hidden');$('tourTopbar').classList.remove('tour-hidden');$('tourBottom').classList.remove('tour-hidden');$('tourPoiLayer').classList.remove('tour-hidden');$('tourRouteSvg').classList.remove('tour-hidden');if(isAdmin)$('tourAdminBtn').classList.remove('tour-hidden')};
+                const navActive=(id)=>document.querySelectorAll('.tour-nav').forEach(b=>b.classList.toggle('active',b.id===id));
+                const modeStatus=(s)=>$('tourModeStatus').textContent=s;
+                const closePanel=()=>{$('tourPanelHost').innerHTML=''};
+                const shell=(title,body)=>{$('tourPanelHost').innerHTML=`<div class="tour-panel-backdrop" id="tourBackdrop"><section class="tour-sheet tour-glass"><div class="tour-sheet-handle"></div><div class="tour-sheet-head"><h2>${title}</h2><button class="tour-close" id="tourPanelClose">×</button></div>${body}</section></div>`;$('tourPanelClose').onclick=closePanel;$('tourBackdrop').addEventListener('click',e=>{if(e.target.id==='tourBackdrop')closePanel()})};
+                let homePose=null,defaultAirPose=null,pendingAnchor=null,guideAbort=0,detailPoi=null;
+                const lerp=(a,b,t)=>a+(b-a)*t;const lerpAng=(a,b,t)=>{let d=((b-a+540)%360)-180;return a+d*t};
+                const animatePose=(pose,forceMode='orbit',duration=900)=>new Promise(resolve=>{if(!pose||!viewer.cameraManager){resolve();return}const c=viewer.cameraManager.camera,start=snapshot();if(state.cameraMode!==forceMode)state.cameraMode=forceMode;viewer.cameraManager.snap();const t0=performance.now();const step=(now)=>{const t=Math.min(1,(now-t0)/duration),e=1-Math.pow(1-t,3);c.position.set(lerp(start.position[0],pose.position[0],e),lerp(start.position[1],pose.position[1],e),lerp(start.position[2],pose.position[2],e));c.angles.set(lerpAng(start.angles[0],pose.angles[0],e),lerpAng(start.angles[1],pose.angles[1],e),lerpAng(start.angles[2],pose.angles[2],e));c.distance=lerp(start.distance,pose.distance,e);c.fov=lerp(start.fov||70,pose.fov||70,e);viewer.cameraManager.snap();app.renderNextFrame=true;if(t<1)requestAnimationFrame(step);else resolve()};requestAnimationFrame(step)});
+                const showDetail=(p)=>{detailPoi=p;$('tourDetailTitle').textContent=p.name;$('tourDetailDesc').textContent=p.desc||'暂无介绍';$('tourDetail').classList.remove('tour-hidden')};
+                const hideDetail=()=>{$('tourDetail').classList.add('tour-hidden');detailPoi=null};
+                const visitPoi=async(i,{narrate=true}={})=>{const p=tour.pois[i];if(!p?.pose){toast('该景点还没有设置观察机位');return}closePanel();enterProduct();navActive('tourPoiBtn');modeStatus(p.name);$('tourCrosshair').classList.add('tour-hidden');if(narrate&&tour.autoNarrate)speak(`${p.name}。${p.desc}`);await animatePose(p.pose,'orbit',950);showDetail(p)};
+                const enterAir=async()=>{enterProduct();hideDetail();window.speechSynthesis?.cancel();navActive('tourAirBtn');modeStatus('空中总览');$('tourCrosshair').classList.add('tour-hidden');const pose=tour.airPose||defaultAirPose||homePose;if(pose)await animatePose(pose,'orbit',700)};
+                const enterRoam=async()=>{enterProduct();hideDetail();window.speechSynthesis?.cancel();navActive('tourRoamBtn');const hasWalk=!document.getElementById('fpsCamera')?.classList.contains('hidden');if(tour.roamPose)await animatePose(tour.roamPose,'fly',500);if(hasWalk){document.getElementById('fpsCamera')?.click();modeStatus('步行漫游');toast('左下摇杆行走 · 右侧拖动观察')}else{document.getElementById('flyCamera')?.click();modeStatus('地面漫游 · 无碰撞');toast('已进入地面视角；当前尚未启用防穿墙碰撞')} $('tourCrosshair').classList.remove('tour-hidden')};
+                const showPois=()=>{const body=`<p>景点标签在空中总览中直接可见。无论点击标签还是这里的景点卡片，都只需一次点击：自动进入预设视角并播放讲解。</p><div class="tour-poi-list">${tour.pois.map((p,i)=>`<div class="tour-poi-card"><b>${i+1}. ${esc(p.name)}</b><small>${p.anchor?'📍 已定位':'尚未定位'} · ${p.pose?'🎥 已设机位':'尚未设机位'}</small><div class="tour-card-actions"><button class="tour-mini accent" data-visit="${i}" ${p.pose?'':'disabled'}>进入景点</button></div></div>`).join('')}</div>`;shell('景点导览',body);document.querySelectorAll('[data-visit]').forEach(b=>b.onclick=()=>visitPoi(+b.dataset.visit))};
+                const routeSummary=()=>{let total=0,mins=0;tour.pois.forEach((p,i)=>{if(i>0){total+=Number(p.segment?.distance)||0;mins+=Number(p.segment?.minutes)||0}});return{total,mins}};
+                const showRoute=()=>{const valid=tour.pois.filter(p=>p.pose);const s=routeSummary();const rows=tour.pois.map((p,i)=>`<div class="route-row"><div class="route-num">${i+1}</div><div><b>${esc(p.name)}</b>${i===0?'<div class="route-meta">推荐线路起点</div>':`<div class="route-meta">距上一站 ${esc(p.segment?.distance||'—')} m · ${esc(p.segment?.road||'道路')} · ${esc(p.segment?.minutes||'—')} 分钟 · ${esc(p.segment?.difficulty||'')}</div>`}</div></div>`).join('');shell('推荐游览线路',`<p>当前V4以后台填写的景点顺序生成线路示意。总距离约 <b>${s.total||'—'} m</b>，预计 <b>${s.mins||'—'} 分钟</b>。线路连线用于导览展示，尚不是基于道路网的自动寻路。</p>${rows}<div class="tour-card-actions"><button class="tour-mini accent" id="startRoute" ${valid.length?'':'disabled'}>▶ 开始自动导览</button></div>`);$('startRoute')&&($('startRoute').onclick=()=>{closePanel();runGuide()})};
+                const runGuide=async()=>{const valid=tour.pois.map((p,i)=>({p,i})).filter(x=>x.p.pose);if(!valid.length){toast('请先设置景点机位');if(isAdmin)showAdmin();return}enterProduct();const token=++guideAbort;$('tourGuidebar').classList.remove('tour-hidden');navActive('tourGuideBtn');for(let k=0;k<valid.length;k++){if(token!==guideAbort)break;const {p,i}=valid[k];const seg=k?` · 下一段 ${p.segment?.distance||'—'}m ${p.segment?.road||''}`:'';$('tourGuideText').textContent=`${k+1}/${valid.length} · ${p.name}${seg}`;await visitPoi(i,{narrate:true});const wait=Math.max(4200,Math.min(9000,2400+(p.desc||'').length*85));await new Promise(r=>setTimeout(r,wait))}if(token===guideAbort){$('tourGuideText').textContent='导览结束';await new Promise(r=>setTimeout(r,1000))}$('tourGuidebar').classList.add('tour-hidden');window.speechSynthesis?.cancel()};
+                const stopGuide=()=>{guideAbort++;$('tourGuidebar').classList.add('tour-hidden');window.speechSynthesis?.cancel();toast('已停止导览')};
+                const showMore=()=>shell('更多',`<p><b>操作逻辑</b></p><p>空中：查看全景和全部景点标签。<br>漫游：进入接近人眼高度的第一视角。<br>景点：景点目录，点击后与空中标签执行同一套“进入+讲解”动作。<br>导览：按后台设置的顺序自动游览。</p>${isAdmin?'<div class="tour-note">你当前处于后台模式，可点击右上角“后台”设置精准点位、机位和线路。</div>':'<div class="tour-note">后台设置入口不会对普通游客显示。</div>'}`);
+                const downloadConfig=()=>{const blob=new Blob([JSON.stringify(tour,null,2)],{type:'application/json'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='tour-config.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),500);toast('已导出 tour-config.json')};
+                const saveAdminFields=()=>{tour.title=$('admTitle')?.value.trim()||tour.title;tour.subtitle=$('admSub')?.value.trim()||tour.subtitle;tour.autoNarrate=$('admNarrate')?.checked??tour.autoNarrate;tour.pois.forEach((p,i)=>{const n=$(`n${i}`),d=$(`d${i}`);if(n)p.name=n.value.trim()||`景点${i+1}`;if(d)p.desc=d.value.trim();if(i>0){p.segment={distance:$(`dist${i}`)?.value||'',road:$(`road${i}`)?.value||'',minutes:$(`min${i}`)?.value||'',difficulty:$(`diff${i}`)?.value||''}}});saveDraft();setTitle();renderMarkers();toast('后台草稿已保存')};
+                const showAdmin=()=>{if(!isAdmin)return;const cards=tour.pois.map((p,i)=>`<div class="tour-poi-card"><b>景点 ${i+1}</b><input class="tour-input" id="n${i}" value="${esc(p.name)}"><textarea class="tour-textarea" id="d${i}">${esc(p.desc)}</textarea>${i?`<div class="tour-grid2"><label>距上一站(m)<input class="tour-input" id="dist${i}" value="${esc(p.segment?.distance||'')}"></label><label>预计步行(min)<input class="tour-input" id="min${i}" value="${esc(p.segment?.minutes||'')}"></label><label>道路类型<input class="tour-input" id="road${i}" value="${esc(p.segment?.road||'')}"></label><label>难度<input class="tour-input" id="diff${i}" value="${esc(p.segment?.difficulty||'')}"></label></div>`:''}<div class="tour-card-actions"><button class="tour-mini accent" data-anchor="${i}">📍 ① 在模型上打点</button><button class="tour-mini" data-pose="${i}">🎥 ② 记录当前机位</button><button class="tour-mini" data-up="${i}" ${i===0?'disabled':''}>↑</button><button class="tour-mini" data-down="${i}" ${i===tour.pois.length-1?'disabled':''}>↓</button><button class="tour-mini danger" data-del="${i}" ${tour.pois.length<=1?'disabled':''}>删除</button></div><small>${p.anchor?'✓ 精准点位已设置':'○ 未设置点位'} · ${p.pose?'✓ 观察机位已记录':'○ 未记录机位'}</small></div>`).join('');shell('云游后台（原型）',`<p>“景点点位”和“观察机位”分开设置：先直接点击建筑打大头钉，再调整镜头到你最满意的局部角度记录机位。</p><label>项目名称<input class="tour-input" id="admTitle" value="${esc(tour.title)}"></label><label>副标题<input class="tour-input" id="admSub" value="${esc(tour.subtitle||'')}"></label><label style="display:flex;align-items:center;gap:8px;margin-top:12px"><input type="checkbox" id="admNarrate" ${tour.autoNarrate?'checked':''}> 点击景点后自动语音讲解</label><div class="tour-card-actions"><button class="tour-mini accent" id="saveAdmin">保存草稿</button><button class="tour-mini" id="setAir">✈ 记录当前为空中首页</button><button class="tour-mini" id="setRoam">🕹 记录当前为漫游起点</button></div><div class="tour-poi-list">${cards}</div><div class="tour-card-actions"><button class="tour-mini accent" id="addPoi">＋新增景点</button><button class="tour-mini" id="exportCfg">⬇ 导出线上配置JSON</button><button class="tour-mini danger" id="clearDraft">清除本机草稿</button></div><div class="tour-note">原型后台不需要服务器：设置完成后导出 <b>tour-config.json</b>，再上传到 GitHub 仓库根目录。普通游客打开正式网址就会读取这份配置；只有带 <b>?admin=1</b> 的网址才显示后台按钮。</div>`);
+                    $('saveAdmin').onclick=()=>{saveAdminFields();closePanel()};$('setAir').onclick=()=>{saveAdminFields();tour.airPose=snapshot();saveDraft();toast('已记录空中首页视角')};$('setRoam').onclick=()=>{saveAdminFields();tour.roamPose=snapshot();saveDraft();toast('已记录漫游起点视角')};$('addPoi').onclick=()=>{saveAdminFields();tour.pois.push({id:`p${Date.now()}`,name:`景点${tour.pois.length+1}`,desc:'',anchor:null,pose:null,segment:{distance:'',road:'步道',minutes:'',difficulty:'轻松'}});saveDraft();showAdmin()};$('exportCfg').onclick=()=>{saveAdminFields();downloadConfig()};$('clearDraft').onclick=()=>{localStorage.removeItem(STORAGE_KEY);location.reload()};
+                    document.querySelectorAll('[data-anchor]').forEach(b=>b.onclick=()=>{saveAdminFields();pendingAnchor=+b.dataset.anchor;closePanel();enterAir();$('tourPlaceText').textContent=`请直接点击“${tour.pois[pendingAnchor].name}”本体，系统会把大头钉落在点击位置`;$('tourPlaceBanner').classList.remove('tour-hidden');toast('点位设置模式：直接点模型上的目标')});
+                    document.querySelectorAll('[data-pose]').forEach(b=>b.onclick=()=>{saveAdminFields();const i=+b.dataset.pose;tour.pois[i].pose=snapshot();saveDraft();toast(`已记录 ${tour.pois[i].name} 的观察机位`);showAdmin()});
+                    document.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{saveAdminFields();tour.pois.splice(+b.dataset.del,1);saveDraft();renderMarkers();showAdmin()});document.querySelectorAll('[data-up]').forEach(b=>b.onclick=()=>{saveAdminFields();const i=+b.dataset.up;[tour.pois[i-1],tour.pois[i]]=[tour.pois[i],tour.pois[i-1]];saveDraft();renderMarkers();showAdmin()});document.querySelectorAll('[data-down]').forEach(b=>b.onclick=()=>{saveAdminFields();const i=+b.dataset.down;[tour.pois[i+1],tour.pois[i]]=[tour.pois[i],tour.pois[i+1]];saveDraft();renderMarkers();showAdmin()});
                 };
-                const loadCfg = () => {
-                    try {
-                        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-                        return { ...defaults, ...saved, pois: defaults.pois.map((p,i)=>({ ...p, ...(saved.pois?.[i] || {}) })) };
-                    } catch { return structuredClone(defaults); }
-                };
-                let tour = loadCfg();
-                const saveCfg = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(tour));
-
-                const snapshot = () => {
-                    const c = viewer.cameraManager?.camera;
-                    if (!c) return null;
-                    return { position:[c.position.x,c.position.y,c.position.z], angles:[c.angles.x,c.angles.y,c.angles.z], distance:c.distance, fov:c.fov, mode:state.cameraMode };
-                };
-                const focusSnapshot = () => {
-                    const c = viewer.cameraManager?.camera;
-                    if (!c) return null;
-                    const v = c.position.clone();
-                    c.calcFocusPoint(v);
-                    return [v.x,v.y,v.z];
-                };
-                const applyPose = (pose, forceMode='orbit') => {
-                    if (!pose || !viewer.cameraManager) return;
-                    const c = viewer.cameraManager.camera;
-                    c.position.set(...pose.position);
-                    c.angles.set(...pose.angles);
-                    c.distance = pose.distance;
-                    c.fov = pose.fov || 70;
-                    if (state.cameraMode !== forceMode) state.cameraMode = forceMode;
-                    viewer.cameraManager.snap();
-                    app.renderNextFrame = true;
-                };
-
-                const setTitle = () => {
-                    $('tourIntroTitle').textContent = tour.title;
-                    $('tourBrandTitle').textContent = tour.title;
-                    document.title = tour.title;
-                };
-                setTitle();
-
-                let homePose = null;
-                let airPose = null;
-                let guideAbort = 0;
-                const sleep = (ms) => new Promise(r=>setTimeout(r,ms));
-                const toast = (msg) => {
-                    const el=$('tourToast'); el.textContent=msg; el.classList.remove('tour-hidden');
-                    clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.add('tour-hidden'),1800);
-                };
-                const speak = (text) => {
-                    if (!('speechSynthesis' in window) || !text) return;
-                    speechSynthesis.cancel();
-                    const u = new SpeechSynthesisUtterance(text);
-                    u.lang='zh-CN'; u.rate=.92; u.pitch=1;
-                    speechSynthesis.speak(u);
-                };
-                const enterProduct = () => {
-                    $('tourIntro').classList.add('tour-hidden');
-                    $('tourTopbar').classList.remove('tour-hidden');
-                    $('tourBottom').classList.remove('tour-hidden');
-                    $('tourPoiLayer').classList.remove('tour-hidden');
-                };
-                const navActive = (id) => document.querySelectorAll('.tour-nav').forEach(b=>b.classList.toggle('active', b.id===id));
-                const modeStatus = (text) => $('tourModeStatus').textContent=text;
-
-                const enterAir = () => {
-                    enterProduct();
-                    document.getElementById('orbitCamera')?.click();
-                    if (airPose) applyPose(airPose, 'orbit');
-                    navActive('tourAirBtn'); modeStatus('空中视角'); $('tourCrosshair').classList.add('tour-hidden');
-                };
-                const enterFly = () => {
-                    enterProduct();
-                    document.getElementById('flyCamera')?.click();
-                    navActive('tourFlyBtn'); modeStatus('第一视角漫游'); $('tourCrosshair').classList.remove('tour-hidden');
-                    toast('左下摇杆移动 · 右侧拖动观察');
-                };
-                const resetHome = () => { if(homePose) applyPose(homePose,'orbit'); enterAir(); };
-
-                const closePanel = () => $('tourPanelHost').innerHTML='';
-                const shell = (title, body) => {
-                    $('tourPanelHost').innerHTML = `<div class="tour-panel-backdrop" id="tourBackdrop"><section class="tour-sheet tour-glass"><div class="tour-sheet-handle"></div><div class="tour-sheet-head"><div><h2>${title}</h2></div><button class="tour-close" id="tourPanelClose">×</button></div>${body}</section></div>`;
-                    $('tourPanelClose').onclick=closePanel;
-                    $('tourBackdrop').addEventListener('click',e=>{ if(e.target.id==='tourBackdrop') closePanel(); });
-                };
-                const esc = (s='') => s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-
-                const showPois = () => {
-                    const body = `<p>点击景点即可切换到你记录的最佳观察位置，并可播放中文语音讲解。</p><div class="tour-poi-list">${tour.pois.map((p,i)=>`<div class="tour-poi-card"><b>${esc(p.name)}</b><small>${p.pose?'已记录视角':'尚未记录视角'}</small><div class="tour-card-actions"><button class="tour-mini accent" data-go="${i}" ${p.pose?'':'disabled'}>前往景点</button><button class="tour-mini" data-speak="${i}">🔊 讲解</button></div></div>`).join('')}</div>`;
-                    shell('推荐景点', body);
-                    document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{ const i=+b.dataset.go; closePanel(); gotoPoi(i,true); });
-                    document.querySelectorAll('[data-speak]').forEach(b=>b.onclick=()=>speak(tour.pois[+b.dataset.speak].desc));
-                };
-
-                const showSettings = () => {
-                    const body = `<p>这是粗略版最实用的功能：你不用改代码，直接在场景里调整到喜欢的视角，再回来点“记录当前视角”。</p>
-                    <label>项目名称<input class="tour-input" id="tourTitleInput" value="${esc(tour.title)}"></label>
-                    <div class="tour-poi-list">${tour.pois.map((p,i)=>`<div class="tour-poi-card"><b>景点 ${i+1}</b><input class="tour-input" id="poiName${i}" value="${esc(p.name)}"><textarea class="tour-textarea" id="poiDesc${i}">${esc(p.desc)}</textarea><div class="tour-card-actions"><button class="tour-mini accent" data-record="${i}">📍 记录当前视角</button><button class="tour-mini" data-clear="${i}">清除</button></div><small>${p.pose?'✓ 已记录，可显示空间标签':'未记录'}</small></div>`).join('')}</div>
-                    <div class="tour-card-actions"><button class="tour-mini accent" id="tourSaveSettings">保存文字</button><button class="tour-mini" id="tourResetHome">回到初始视角</button></div>
-                    <div class="tour-note">提示：目前“漫游”是自由飞行式第一视角，还没有地面碰撞；真正的步行、防穿墙可在后续加入碰撞数据或 UE5 版。</div>`;
-                    shell('云游设置', body);
-                    $('tourSaveSettings').onclick=()=>{ tour.title=$('tourTitleInput').value.trim()||defaults.title; tour.pois.forEach((p,i)=>{p.name=$(`poiName${i}`).value.trim()||`景点${i+1}`;p.desc=$(`poiDesc${i}`).value.trim();}); saveCfg(); setTitle(); renderMarkers(); toast('文字已保存'); closePanel(); };
-                    document.querySelectorAll('[data-record]').forEach(b=>b.onclick=()=>{ const i=+b.dataset.record; tour.pois[i].name=$(`poiName${i}`).value.trim()||`景点${i+1}`; tour.pois[i].desc=$(`poiDesc${i}`).value.trim(); tour.pois[i].pose=snapshot(); tour.pois[i].focus=focusSnapshot(); saveCfg(); renderMarkers(); toast(`已记录：${tour.pois[i].name}`); closePanel(); });
-                    document.querySelectorAll('[data-clear]').forEach(b=>b.onclick=()=>{ const i=+b.dataset.clear; tour.pois[i].pose=null;tour.pois[i].focus=null;saveCfg();renderMarkers();showSettings(); });
-                    $('tourResetHome').onclick=()=>{ closePanel(); resetHome(); };
-                };
-
-                const gotoPoi = (i, narrate=false) => {
-                    const p=tour.pois[i]; if(!p.pose){toast('这个景点还没有记录视角');return;}
-                    applyPose(p.pose,'orbit'); navActive('tourPoiBtn'); modeStatus(p.name); $('tourCrosshair').classList.add('tour-hidden');
-                    if(narrate) { toast(`已到达：${p.name}`); setTimeout(()=>speak(`${p.name}。${p.desc}`),500); }
-                };
-
-                const runGuide = async () => {
-                    const valid=tour.pois.map((p,i)=>({p,i})).filter(x=>x.p.pose);
-                    if(!valid.length){ toast('请先在“设置”里记录至少一个景点'); showSettings(); return; }
-                    enterProduct(); const token=++guideAbort; $('tourGuidebar').classList.remove('tour-hidden'); navActive('tourGuideBtn');
-                    for(let k=0;k<valid.length;k++){
-                        if(token!==guideAbort) break;
-                        const {p,i}=valid[k]; $('tourGuideText').textContent=`导览 ${k+1}/${valid.length} · ${p.name}`; gotoPoi(i,false); speak(`${p.name}。${p.desc}`);
-                        await sleep(Math.max(4500, Math.min(9000, 2500 + p.desc.length*90)));
-                    }
-                    if(token===guideAbort){ $('tourGuideText').textContent='导览结束'; await sleep(1200); }
-                    $('tourGuidebar').classList.add('tour-hidden'); window.speechSynthesis?.cancel();
-                };
-                const stopGuide=()=>{guideAbort++;$('tourGuidebar').classList.add('tour-hidden');window.speechSynthesis?.cancel();toast('已停止自动导览');};
-
-                const markerEls=[];
-                const renderMarkers = () => {
-                    const layer=$('tourPoiLayer'); layer.innerHTML=''; markerEls.length=0;
-                    tour.pois.forEach((p,i)=>{ if(!p.focus) return; const b=document.createElement('button');b.className='tour-poi-marker';b.textContent=p.name;b.onclick=()=>gotoPoi(i,true);layer.appendChild(b);markerEls.push({el:b,poi:p,i,world:null,screen:null}); });
-                };
-                const updateMarkers = () => {
-                    if(viewer.cameraManager && markerEls.length){
-                        markerEls.forEach(m=>{
-                            if(!m.world){ const base=viewer.cameraManager.camera.position.clone(); m.world=base; m.screen=base.clone(); }
-                            m.world.set(...m.poi.focus);
-                            cameraEntity.camera.worldToScreen(m.world,m.screen);
-                            const rect=canvas.getBoundingClientRect();
-                            const sx=(canvas.width ? rect.width/canvas.width : 1);
-                            const sy=(canvas.height ? rect.height/canvas.height : 1);
-                            const x=rect.left + m.screen.x*sx, y=rect.top + m.screen.y*sy, z=m.screen.z;
-                            const visible=z>0 && x>-80 && y>-80 && x<innerWidth+80 && y<innerHeight+80;
-                            m.el.style.display=visible?'block':'none';
-                            if(visible){m.el.style.left=`${x}px`;m.el.style.top=`${y}px`;}
-                        });
-                    }
-                    requestAnimationFrame(updateMarkers);
-                };
-
-                $('tourAirBtn').onclick=enterAir; $('tourFlyBtn').onclick=enterFly; $('tourPoiBtn').onclick=showPois; $('tourGuideBtn').onclick=runGuide; $('tourMoreBtn').onclick=showSettings;
-                $('tourGuideStop').onclick=stopGuide;
-                $('tourEnterAir').onclick=enterAir; $('tourEnterFly').onclick=enterFly; $('tourEnterGuide').onclick=runGuide;
-
-                // Wait for SuperSplat's first rendered frame before exposing camera-dependent tools.
-                const enable = () => {
-                    homePose=snapshot();
-                    if(homePose){
-                        airPose=JSON.parse(JSON.stringify(homePose));
-                        const lift=Math.max(8, Math.min(35, (homePose.distance||30)*0.22));
-                        airPose.position[1]+=lift; airPose.fov=Math.min(80, Math.max(68,homePose.fov||72)); airPose.mode='orbit';
-                    }
-                    $('tourEnterAir').disabled=false; $('tourEnterAir').textContent='✈ 从空中开始';
-                    $('tourEnterFly').disabled=false; $('tourEnterGuide').disabled=false;
-                    renderMarkers(); updateMarkers();
-                };
-                if(state.loaded) enable(); else events.on('firstFrame', enable);
-                events.on('cameraMode:changed',(v)=>{ if(v==='fly'){modeStatus('第一视角漫游');$('tourCrosshair').classList.remove('tour-hidden');} else if(v==='orbit'){$('tourCrosshair').classList.add('tour-hidden');} });
+                events.on('pick',(position)=>{if(pendingAnchor===null)return;const i=pendingAnchor;pendingAnchor=null;tour.pois[i].anchor=[position.x,position.y,position.z];saveDraft();$('tourPlaceBanner').classList.add('tour-hidden');renderMarkers();toast(`大头钉已定位：${tour.pois[i].name}`);setTimeout(showAdmin,350)});
+                const markerEls=[];const renderMarkers=()=>{const layer=$('tourPoiLayer');layer.innerHTML='';markerEls.length=0;tour.pois.forEach((p,i)=>{if(!p.anchor)return;const b=document.createElement('button');b.className='tour-poi-marker';b.textContent=p.name;b.onclick=()=>visitPoi(i);layer.appendChild(b);markerEls.push({el:b,poi:p,world:null,screen:null})})};
+                const updateOverlays=()=>{const points=[];if(viewer.cameraManager){const rect=canvas.getBoundingClientRect(),sx=canvas.width?rect.width/canvas.width:1,sy=canvas.height?rect.height/canvas.height:1;markerEls.forEach(m=>{if(!m.world){m.world=viewer.cameraManager.camera.position.clone();m.screen=m.world.clone()}m.world.set(...m.poi.anchor);cameraEntity.camera.worldToScreen(m.world,m.screen);const x=rect.left+m.screen.x*sx,y=rect.top+m.screen.y*sy,z=m.screen.z,visible=z>0&&x>-100&&y>-100&&x<innerWidth+100&&y<innerHeight+100&&state.cameraMode==='orbit';m.el.style.display=visible?'block':'none';if(visible){m.el.style.left=`${x}px`;m.el.style.top=`${y}px`}if(z>0)points.push(`${x},${y}`)});$('tourRouteLine').setAttribute('points',state.cameraMode==='orbit'?points.join(' '):'')}requestAnimationFrame(updateOverlays)};
+                $('tourAirBtn').onclick=enterAir;$('tourRoamBtn').onclick=enterRoam;$('tourPoiBtn').onclick=showPois;$('tourGuideBtn').onclick=showRoute;$('tourMoreBtn').onclick=showMore;$('tourGuideStop').onclick=stopGuide;$('tourEnterAir').onclick=enterAir;$('tourEnterRoam').onclick=enterRoam;$('tourEnterGuide').onclick=showRoute;$('tourAdminBtn').onclick=showAdmin;$('tourDetailClose').onclick=hideDetail;$('tourReplay').onclick=()=>detailPoi&&speak(`${detailPoi.name}。${detailPoi.desc}`);$('tourStopVoice').onclick=()=>window.speechSynthesis?.cancel();
+                const enable=()=>{homePose=snapshot();if(homePose){defaultAirPose=clone(homePose);const lift=Math.max(8,Math.min(35,(homePose.distance||30)*.22));defaultAirPose.position[1]+=lift;defaultAirPose.fov=Math.min(80,Math.max(68,homePose.fov||72))}$('tourEnterAir').disabled=false;$('tourEnterAir').textContent='✈ 从空中开始';$('tourEnterRoam').disabled=false;$('tourEnterGuide').disabled=false;renderMarkers();updateOverlays();if(isAdmin)toast('后台模式已开启：右上角“后台”')};
+                if(state.loaded)enable();else events.on('firstFrame',enable);
+                events.on('cameraMode:changed',v=>{if(v==='walk'){modeStatus('步行漫游');$('tourCrosshair').classList.remove('tour-hidden')}else if(v==='fly'){$('tourCrosshair').classList.remove('tour-hidden')}else if(v==='orbit'){$('tourCrosshair').classList.add('tour-hidden')}});
             });
         </script>
     </body>
