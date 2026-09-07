@@ -1,0 +1,25 @@
+SuperSplat 手机分享版（GitHub Pages）
+===================================
+
+这个文件夹已经为 GitHub 网页上传做过处理：
+1. index.sog 被拆成 index.sog.part1 / index.sog.part2，每个文件都小于 25 MiB；
+2. index.html 会在浏览器中自动把两个文件拼回完整 SOG；
+3. Viewer 默认强制使用 WebGL 2，以提高 iPhone / Android 浏览器兼容性；
+4. 请保持所有文件都在仓库根目录，不要改名。
+
+仓库中应当有 6 个文件：
+- index.html
+- index.css
+- index.js
+- settings.json
+- index.sog.part1
+- index.sog.part2
+
+GitHub Pages 开启方法：
+Settings -> Pages -> Build and deployment -> Source: Deploy from a branch
+Branch: main / (root) -> Save
+
+发布后地址通常是：
+https://你的GitHub用户名.github.io/仓库名/
+
+注意：第一次部署可能需要刷新几次才能看到页面；访问时请优先使用 Safari 或 Chrome。
